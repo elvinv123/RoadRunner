@@ -31,4 +31,4 @@ RoadRuner is a game in which the user drives his car around obstacles collecting
 - Sort out bugs.
 - Prepare app for production.
 ## Bonus Features
-- Slingshot records acceleration data in g's (9.81 m/s<sup>2</sup>)
+- Boost feature (Car moves faster)
