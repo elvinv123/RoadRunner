@@ -2,7 +2,7 @@ const CONSTANTS = {
     TERMINAL_VEL: 12,
     CAR_WIDTH: 92,
     CAR_HEIGHT: 180,
-    GRAVITY: 0.5,
+    SLOWDOWN: 0.5,
     SPEED: 8
 };
 
@@ -10,8 +10,8 @@ export default class Car {
     constructor(dimensions) {
         this.dimensions = dimensions;
         this.vel = 0;
-        this.x = this.dimensions.width / 3;
-        this.y = this.dimensions.height / 2;
+        this.x = 400;
+        this.y = 400;
     }
 
     animate(ctx) {
@@ -35,10 +35,9 @@ export default class Car {
         
         this.y += this.vel;
 
-        this.vel += CONSTANTS.GRAVITY;
+        this.vel += CONSTANTS.SLOWDOWN;
 
         if (Math.abs(this.vel) > CONSTANTS.TERMINAL_VEL) {
-            //if the terminal velocity is exceeded, we set it to the terminal velicty
             if (this.vel > 0) {
                 this.vel = CONSTANTS.TERMINAL_VEL;
             } else {
