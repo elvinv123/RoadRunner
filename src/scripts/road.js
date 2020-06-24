@@ -14,7 +14,7 @@ export default class Road{
         ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
 
         var img = new Image(); 
-        img.src = "src/road.png";
+        img.src = "src/images/road.png";
         
         var imgHeight = 0;
         var scrollSpeed = 10; 
