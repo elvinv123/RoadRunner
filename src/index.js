@@ -36,28 +36,40 @@ imgArray[2] = new Image();
 imgArray[2].src = 'src/images/Mini_van.png';
 
 var traffic = [
-{ "id": "enemy1", "x": 200, "y": -20, "w": 70, "h": 140, "speed": 1},
-{ "id": "enemy2", "x": 320, "y": -20, "w": 70, "h": 140, "speed": 2},
-{ "id": "enemy3", "x": 450, "y": -20, "w": 70, "h": 140, "speed": .5 },
-{ "id": "enemy4", "x": 320, "y": -20, "w": 70, "h": 140, "speed": 2 },
+{ "id": "enemy1", "x": 200, "y": -600, "w": 70, "h": 140, "speed": 1},
+{ "id": "enemy2", "x": 320, "y": -600, "w": 70, "h": 140, "speed": 2},
+{ "id": "enemy3", "x": 450, "y": -600, "w": 70, "h": 140, "speed": .5 },
+{ "id": "enemy4", "x": 580, "y": -600, "w": 70, "h": 140, "speed": 5 },
+    { "id": "enemy1", "x": 200, "y": -20, "w": 70, "h": 140, "speed": 1 },
+    { "id": "enemy2", "x": 320, "y": -20, "w": 70, "h": 140, "speed": 2 },
+    { "id": "enemy3", "x": 450, "y": -20, "w": 70, "h": 140, "speed": .5 },
+    { "id": "enemy4", "x": 580, "y": -20, "w": 70, "h": 140, "speed": 5 },
 ];
 
 function renderTraffic() {
+    
     for (var i = 0; i < traffic.length; i++) {
-
-        ctx.drawImage(imgArray[0], traffic[i].x, traffic[i].y += traffic[i].speed, traffic[i].w, traffic[i].h);
+        
+        ctx.drawImage(imgArray[0], traffic[0].x, traffic[0].y += traffic[0].speed, traffic[0].w, traffic[0].h);
+        if(traffic[i].y >=620){
+            traffic.splice(i, 1);
+        }
     }
+
 }
 
-function hitDetect(m, mi) {
+function hitDetect() {
     for (var i = 0; i < traffic.length; i++) {
         var e = traffic[i];
         if (carX + carWidth >= e.x && carX <= e.x + e.w && carY >= e.y && carY <= e.y + e.h) {
-             // Remove the missile
             traffic.splice(i, 1); // Remove the enemy that the missile hit
-            
+            lives -= 1;
         }
     }
+}
+
+function addScore(){
+    const interval = setInterval(()=> score+= 1, 1000 )
 }
 
 
@@ -120,7 +132,12 @@ function draw() {
     drawScore();
     drawLives();
     hitDetect();
-    renderTraffic();
+    if(lives!==0){
+        addScore();
+        renderTraffic();
+    }
+    
+    
     
 
     if (rightPressed && carX < canvas.width - carWidth) {
