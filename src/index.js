@@ -28,6 +28,16 @@ var lives = 3;
 
 
 var traffic = [ ];
+var coins = [ ];
+var hearts = [];
+
+const coinImg = new Array();
+coinImg[0] = new Image();
+coinImg[0].src = 'src/images/Gold_21.png';
+coinImg[1] = new Image();
+coinImg[1].src = 'src/images/Silver_21.png';
+coinImg[2] = new Image();
+coinImg[2].src = 'src/images/Bronze_21.png';
 
 const carImg= new Array();
 carImg[0] = new Image();
@@ -56,21 +66,59 @@ function addCar() {
     var randLane = lanes[(Math.floor(Math.random() * 4))]
     var randCar = Math.floor(Math.random() * 6);
 
-    traffic.push({ "img": carImg[randCar], "x": randLane, "y": -600, "w": width[randCar], "h": height[randCar], "speed": 4})
+    traffic.push({ "img": carImg[randCar], "x": randLane, "y": -600, "w": width[randCar], "h": height[randCar], "speed": 8})
 }
 
-setInterval(addCar, 1500);  
+function addCoin() {
+    const lanes = [273, 403, 537];
+
+    var randLane = lanes[(Math.floor(Math.random() * 4))]
+
+    coins.push({ "img": coinImg[0], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 4 })
+}
+
+function addLife() {
+    const lanes = [273, 403, 537];
+
+    var randLane = lanes[(Math.floor(Math.random() * 4))]
+
+    hearts.push({ "img": coinImg[2], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 5 })
+}
+
+setInterval(addCar, 1000);
+setInterval(addCoin, 1500);  
+setInterval(addLife, 20000);
+
 function renderTraffic() {
-    
-    
+
    if(traffic){ for (var i = 0; i < traffic.length; i++) {
         ctx.drawImage(traffic[i].img, traffic[i].x, traffic[i].y += traffic[i].speed, traffic[i].w, traffic[i].h)
         if(traffic[i].y >=620){
             traffic.splice(i, 1);
         }
-       
     }}
 }
+
+function renderCoins() {
+    if (coins) {
+        for (var i = 0; i < coins.length; i++) {
+            ctx.drawImage(coins[i].img, coins[i].x, coins[i].y += coins[i].speed, coins[i].w, coins[i].h)
+            if (coins[i].y >= 620) {
+                coins.splice(i, 1);
+            }
+        }
+    }
+}
+function renderLives() {
+    for (var i = 0; i < hearts.length; i++) {
+        ctx.drawImage(hearts[i].img, hearts[i].x, hearts[i].y += hearts[i].speed, hearts[i].w, hearts[i].h)
+        if (hearts[i].y >= 620) {
+            hearts.splice(i, 1);
+        }
+    }
+
+}
+
 
 function hitDetect() {
     for (var i = 0; i < traffic.length; i++) {
@@ -79,17 +127,22 @@ function hitDetect() {
             traffic.splice(i, 1);
             lives -= 1;
         }
-        // if (carX + carWidth >= e.x && carX <= e.x + e.w && carY >= e.y && carY <= e.y + e.h) {
-        //     traffic.splice(i, 1);
-        //     lives -= 1;
-        // }
+    }
+    for (var i = 0; i < coins.length; i++) {
+        var f = coins[i];
+        if (carX + carWidth >= f.x && carX <= f.x + f.w && carY >= f.y && carY <= f.y + f.h) {
+            coins.splice(i, 1);
+            score += 100;
+        }
+    }
+    for (var i = 0; i < hearts.length; i++) {
+        var g = hearts[i];
+        if (carX + carWidth >= g.x && carX <= g.x + g.w && carY >= g.y && carY <= g.y + g.h) {
+            hearts.splice(i, 1);
+            lives += 1;
+        }
     }
 }
-
-function addScore(){
-    const interval = setInterval(()=> score+= 1, 1000 )
-}
-
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -149,9 +202,10 @@ function draw() {
     drawLives();
     hitDetect();
     
-    if(lives!==0){
-        addScore(); 
+    if(lives>=1){
         renderTraffic()
+        renderCoins()
+        renderLives()
     }
     
     
