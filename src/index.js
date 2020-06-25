@@ -26,45 +26,63 @@ var downPressed = false;
 var score = 0;
 var lives = 3;
 
-var imgArray = new Array();
 
-imgArray[0] = new Image();
-imgArray[0].src = 'src/images/car.png';
-imgArray[1] = new Image();
-imgArray[1].src = 'src/images/Audi.png';
-imgArray[2] = new Image();
-imgArray[2].src = 'src/images/Mini_van.png';
+var traffic = [ ];
 
-var traffic = [
-{ "id": "enemy1", "x": 200, "y": -600, "w": 70, "h": 140, "speed": 1},
-{ "id": "enemy2", "x": 320, "y": -600, "w": 70, "h": 140, "speed": 2},
-{ "id": "enemy3", "x": 450, "y": -600, "w": 70, "h": 140, "speed": .5 },
-{ "id": "enemy4", "x": 580, "y": -600, "w": 70, "h": 140, "speed": 5 },
-    { "id": "enemy1", "x": 200, "y": -20, "w": 70, "h": 140, "speed": 1 },
-    { "id": "enemy2", "x": 320, "y": -20, "w": 70, "h": 140, "speed": 2 },
-    { "id": "enemy3", "x": 450, "y": -20, "w": 70, "h": 140, "speed": .5 },
-    { "id": "enemy4", "x": 580, "y": -20, "w": 70, "h": 140, "speed": 5 },
-];
+const carImg= new Array();
+carImg[0] = new Image();
+carImg[0].src = 'src/images/Muscle.png';
+carImg[1] = new Image();
+carImg[1].src = 'src/images/Sports.png';
+carImg[2] = new Image();
+carImg[2].src = 'src/images/Mini_van.png';
+carImg[3] = new Image();
+carImg[3].src = 'src/images/Mini_truck.png';
+carImg[4] = new Image();
+carImg[4].src = 'src/images/Ambulance.png';
+carImg[5] = new Image();
+carImg[5].src = 'src/images/taxi.png';
+carImg[6] = new Image();
+carImg[6].src = 'src/images/Black_viper.png';
 
+
+
+
+function addCar() {
+    const lanes = [200, 320, 450, 580];
+    const width = [70, 85, 110, 110, 110, 85];
+    const height = [140, 160, 220, 220, 220, 160];
+    
+    var randLane = lanes[(Math.floor(Math.random() * 4))]
+    var randCar = Math.floor(Math.random() * 6);
+
+    traffic.push({ "img": carImg[randCar], "x": randLane, "y": -600, "w": width[randCar], "h": height[randCar], "speed": 4})
+}
+
+setInterval(addCar, 1500);  
 function renderTraffic() {
     
-    for (var i = 0; i < traffic.length; i++) {
-        
-        ctx.drawImage(imgArray[0], traffic[0].x, traffic[0].y += traffic[0].speed, traffic[0].w, traffic[0].h);
+    
+   if(traffic){ for (var i = 0; i < traffic.length; i++) {
+        ctx.drawImage(traffic[i].img, traffic[i].x, traffic[i].y += traffic[i].speed, traffic[i].w, traffic[i].h)
         if(traffic[i].y >=620){
             traffic.splice(i, 1);
         }
-    }
-
+       
+    }}
 }
 
 function hitDetect() {
     for (var i = 0; i < traffic.length; i++) {
         var e = traffic[i];
         if (carX + carWidth >= e.x && carX <= e.x + e.w && carY >= e.y && carY <= e.y + e.h) {
-            traffic.splice(i, 1); // Remove the enemy that the missile hit
+            traffic.splice(i, 1);
             lives -= 1;
         }
+        // if (carX + carWidth >= e.x && carX <= e.x + e.w && carY >= e.y && carY <= e.y + e.h) {
+        //     traffic.splice(i, 1);
+        //     lives -= 1;
+        // }
     }
 }
 
@@ -107,23 +125,21 @@ function keyUpHandler(e) {
 }
 
 function drawcar() {
-    ctx.beginPath();
     var img = new Image();
     img.src = "src/images/murci_sv.png";
     ctx.drawImage(img, 0, 0, 646, 1339, carX, carY, carWidth, carHeight);
-    ctx.fill();
-    ctx.closePath();
+
 }
 
 function drawScore() {
-    ctx.font = "16px Arial";
+    ctx.font = "25px Arial";
     ctx.fillStyle = "#0095DD";
     ctx.fillText("Score: " + score, 8, 20);
 }
 function drawLives() {
-    ctx.font = "16px Arial";
+    ctx.font = "25px Arial";
     ctx.fillStyle = "#0095DD";
-    ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
+    ctx.fillText("Lives: " + lives, canvas.width -120, 20);
 }
 
 function draw() {
@@ -132,9 +148,10 @@ function draw() {
     drawScore();
     drawLives();
     hitDetect();
+    
     if(lives!==0){
-        addScore();
-        renderTraffic();
+        addScore(); 
+        renderTraffic()
     }
     
     
