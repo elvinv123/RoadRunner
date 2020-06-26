@@ -1,12 +1,23 @@
-
+body{
+    background-color: black;
+}
 #car-game-road, #car-game{
     position: absolute;
-    /* transform: translate(50%, 10vh); */
   top: 50%;
   left: 50%;
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
 #car-game{
     z-index: 1000;
+}
+
+.game-cover{
+    position: absolute;
+    background-image: url("../src/images/splash_logo.PNG");
+    width: 1280px;
+    height: 527px;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -85%);
 }

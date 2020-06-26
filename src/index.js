@@ -12,7 +12,6 @@ const roadnew = new Road(canvas2)
 // new RoadRunner(canvas);
 
 
-
 roadnew.animate();
 
 const ctx = canvas.getContext("2d");
@@ -32,9 +31,9 @@ let score = 0;
 let lives = 3;
 
 
-const traffic = [];
-const coins = [];
-const hearts = [];
+let traffic = [];
+let coins = [];
+let hearts = [];
 
 const coinImg = new Array();
 coinImg[0] = new Image();
@@ -93,7 +92,7 @@ function addLife() {
     hearts.push({ "img": coinImg[2], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 5 })
 }
 
-setInterval(addCar, 1000);
+setInterval(addCar, 800);
 setInterval(addCoin, 1500);  
 setInterval(addLife, 20000);
 
@@ -232,6 +231,27 @@ function draw() {
     x += dx;
     y += dy;
     requestAnimationFrame(draw);
+
+    if(lives<=0){
+        lost();
+    }
 }
 
-draw();
+function lost(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    traffic = [];
+    coins = [];
+    hearts = [];
+    location.reload();
+}
+function play(){
+    lives =3;
+    draw();
+}
+window.onload = function(){
+    document.getElementById("play-btn").addEventListener("click", play);
+    document.getElementById("play-again-btn").addEventListener("click", play);
+
+}
+
+
