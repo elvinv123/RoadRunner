@@ -249,6 +249,7 @@ function play(){
     draw();
 }
 window.onload = function(){
+    document.getElementById("play-btn").addEventListener("click", () => { document.getElementById("splash").className = "splash-hidden" })
     document.getElementById("play-btn").addEventListener("click", play);
     document.getElementById("play-again-btn").addEventListener("click", play);
 
