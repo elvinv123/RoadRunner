@@ -6,18 +6,22 @@ export default class RoadRunner {
         this.ctx = canvas.getContext("2d");
         this.dimensions = { width: canvas.width, height: canvas.height };
         this.restart();
-        this.registerEvents();
+        this.dx = 2;
+        this.dy = -2;
+        this.score = 0;
+        this.lives = 3;
     }
 
     restart() {
-        this.running = false;
-        this.car = new Car(this.dimensions);
+        this.running = true;
+        this.car = new Car(this.dimensions, this.ctx);
         this.level = new Level(this.dimensions);
         this.animate();
     }
 
    animate(){
-       this.level.animate(this.ctx);
+       this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height);
+        this.level.animate(this.ctx);
         this.car.animate(this.ctx);
        
         if(this.running){
@@ -26,87 +30,12 @@ export default class RoadRunner {
         } 
    }
 
-    registerEvents() {
-        this.boundClickHandler = this.control.bind(this);
-        this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
-    }
 
-   control(e){
-       if (!this.running) {
-           this.play();
-       }
-       this.car.accelerate(this.ctx); 
-   }
-
-   play(){
-       this.running = true;
-       this.animate();    
-        
-
-   }
+//    play(){
+//        this.running = true;
+//        this.animate();    
+//    }
 
 
  
 }
-
-// const Car = require("./car");
-
-// function Game() {
-//     this.cars = [];
-
-//     this.addCar();
-// }
-
-// Game.DIM_X = 1000;
-// Game.DIM_Y = 600;
-// Game.FPS = 32;
-// Game.BG_COLOR = "transparent";
-
-// Game.prototype.add = function add(object) {
-//     if (object instanceof Car) {
-//         this.cars.push(object);
-//     } else {
-//         throw new Error("unknown type of object");
-//     }
-// };
-
-// Game.prototype.addCar = function addShip() {
-//     const car = new Car({
-//         pos: this.randomPosition(),
-//         game: this
-//     });
-
-//     this.add(car);
-
-//     return car;
-// };
-
-// Game.prototype.allObjects = function allObjects() {
-//     return [].concat(this.cars);
-// };
-
-// Game.prototype.draw = function draw(ctx) {
-//     ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
-//     ctx.fillStyle = Game.BG_COLOR;
-//     ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
-
-//     this.allObjects().forEach(function (object) {
-//         object.draw(ctx);
-//     });
-// };
-
-// Game.prototype.moveObjects = function moveObjects(delta) {
-//     this.allObjects().forEach(function (object) {
-//         object.move(delta);
-//     });
-// };
-
-// Game.prototype.randomPosition = function randomPosition() {
-//     return [
-//         Game.DIM_X * Math.random(),
-//         Game.DIM_Y * Math.random()
-//     ];
-// };
-
-
-// module.exports = Game;

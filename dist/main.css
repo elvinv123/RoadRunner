@@ -1,3 +1,12 @@
-#car-game{
+
+#car-game-road, #car-game{
     position: absolute;
+    /* transform: translate(50%, 10vh); */
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+#car-game{
+    z-index: 1000;
 }

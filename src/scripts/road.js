@@ -17,7 +17,6 @@ export default class Road{
         img.src = "src/images/road.png";
         
         var imgHeight = 0;
-        var scrollSpeed = 10; 
        
 
 
@@ -28,7 +27,7 @@ export default class Road{
             
             ctx.drawImage(img, 0, imgHeight - this.dimensions.height);
 
-            imgHeight += scrollSpeed;
+            imgHeight += 20;
 
             if (imgHeight == this.dimensions.height)
                 imgHeight = 0;

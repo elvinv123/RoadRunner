@@ -1,96 +1,107 @@
-const CONSTANTS = {
-    TERMINAL_VEL: 12,
-    CAR_WIDTH: 92,
-    CAR_HEIGHT: 180,
-    SLOWDOWN: .4,
-    SPEED: 10
-};
+
 
 export default class Car {
-    constructor(dimensions) {
+    constructor(dimensions, ctx) {
         this.dimensions = dimensions;
-        this.vel = 0;
+        this.ctx = ctx;
+
+        this.carHeight = 180;
+        this.carWidth = 92;
+        this.carX = (this.dimensions.width - this.carWidth) / 2;
+        this.carY = (this.dimensions.width - this.carWidth) / 2;
         this.x = this.dimensions.width / 2;
-        this.y = this.dimensions.height / 2;
+        this.y = this.dimensions.height - 30;
+        this.dx = 2;
+        this.dy = -2;
+        this.registerEvents();
+
+        this.rightPressed = false;
+        this.leftPressed = false;
+        this.upPressed = false;
+        this.downPressed = false;
     }
 
+    
     animate(ctx) {
-        this.move();
         this.drawCar(ctx); 
+        this.move();
     }
 
     drawCar(ctx) {
         
-        const posX =this.x;
-        const posY = this.y;
-            var img = new Image();
-            img.src = "src/images/murci_sv.png";
-            img.onload = function (e) {
-                ctx.drawImage(img, 0, 0, 646, 1339, posX, posY, CONSTANTS.CAR_WIDTH, CONSTANTS.CAR_HEIGHT);
-            }
+        const img = new Image();
+        img.src = "src/images/murci_sv.png";
+        
+        ctx.drawImage(img, 0, 0, 646, 1339, this.carX, this.carY, this.carWidth, this.carHeight);
     }
 
-    accelerate(){
-        this.vel = -1 * CONSTANTS.SPEED;
+    registerEvents() {
+        
+
+            document.addEventListener("keydown", this.keyDownHandler, false);
+            document.addEventListener("keyup", this.keyUpHandler, false);
+    }
+
+    keyUpHandler(e) {
+        
+        if (e.key == "Right" || e.key == "ArrowRight") {
+            this.rightPressed = false;
+            
+        }
+        else if (e.key == "Left" || e.key == "ArrowLeft") {
+            this.leftPressed = false;
+        }
+        else if (e.key == "Up" || e.key == "ArrowUp") {
+            this.upPressed = false;
+        }
+        else if (e.key == "Down" || e.key == "ArrowDown") {
+            this.downPressed = false;
+        }
+    }
+
+    keyDownHandler(e) {
+        
+        if (e.key == "Right" || e.key == "ArrowRight") {
+            this.rightPressed = true;
+            console.log("rightPressed", this.rightPressed)
+        }
+        else if (e.key == "Left" || e.key == "ArrowLeft") {
+            this.leftPressed = true;
+            console.log("leftPressed")
+        }
+        else if (e.key == "Up" || e.key == "ArrowUp") {
+            this.upPressed = true;
+        }
+        else if (e.key == "Down" || e.key == "ArrowDown") {
+            this.downPressed = true;
+        }
     }
 
     move(){
-        
-        this.y += this.vel;
+        debugger
+        if (this.rightPressed && this.carX < this.dimensions.width - this.carWidth) {
+            this.carX += 7;
+            debugger
+        }
+        else if (this.leftPressed && this.carX > 0) {
+            this.carX -= 7;
+        }
+        else if (this.upPressed && this.carY > 0) {
+            this.carY -= 7;
+        }
+        else if (this.downPressed && this.carY > 0) {
+            this.carY += 7;
+        }
 
-        this.vel += CONSTANTS.SLOWDOWN;
+        // this.x += this.dx;
+        // this.y += this.dy;
+    
     }
 
-    bounds() {
-        return {
-            left: this.x,
-            right: this.x + CONSTANTS.CAR_WIDTH,
-            top: this.y,
-            bottom: this.y + CONSTANTS.CAR_HEIGHT
-        };
-    }
+ 
 
-    outOfBounds() {
-        const aboveTheTop = this.y < 0;
-        const belowTheBottom = this.y + CONSTANTS.CAR_HEIGHT > this.dimensions.height;
-        return aboveTheTop || belowTheBottom;
-    }
+ 
 }
 
 
 
-// const MovingObject = require("./moving_object");
-// const Util = require("./util");
-
-// function randomColor() {
-//     const hexDigits = "0123456789ABCDEF";
-
-//     let color = "#";
-//     for (let i = 0; i < 3; i++) {
-//         color += hexDigits[Math.floor((Math.random() * 16))];
-//     }
-
-//     return color;
-// }
-
-// function Car(options) {
-//     options.radius = Car.RADIUS;
-//     options.vel = options.vel || [0, 0];
-//     options.color = options.color || randomColor();
-
-//     MovingObject.call(this, options);
-// }
-
-// Car.RADIUS = 15;
-
-// Car.prototype.power = function power(impulse) {
-//     this.vel[0] += impulse[0];
-//     this.vel[1] += impulse[1];
-// };
-
-// Car.prototype.relocate = function relocate() {
-//     this.pos = this.game.randomPosition();
-//     this.vel = [0, 0];
-// };
-
-// module.exports = Car;

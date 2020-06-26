@@ -5,18 +5,23 @@ import Road from './scripts/road';
 const canvas = document.getElementById('car-game');
 const canvas2 = document.getElementById('car-game-road');
 const roadnew = new Road(canvas2)
+// new RoadRunner(canvas)
 //  new RoadRunner(canvas)
 
-roadnew.animate();
+
 // new RoadRunner(canvas);
+
+
+
+roadnew.animate();
 
 var ctx = canvas.getContext("2d");
 var x = canvas.width / 2;
 var y = canvas.height - 30;
 var dx = 2;
 var dy = -2;
-var carHeight = 180;
-var carWidth = 92;
+var carHeight = 155;
+var carWidth = 78;
 var carX = (canvas.width - carWidth) / 2;
 var carY = (canvas.width - carWidth) / 2;
 var rightPressed = false;
@@ -27,8 +32,8 @@ var score = 0;
 var lives = 3;
 
 
-var traffic = [ ];
-var coins = [ ];
+var traffic = [];
+var coins = [];
 var hearts = [];
 
 const coinImg = new Array();
@@ -41,30 +46,33 @@ coinImg[2].src = 'src/images/Bronze_21.png';
 
 const carImg= new Array();
 carImg[0] = new Image();
-carImg[0].src = 'src/images/Muscle.png';
+carImg[0].src = 'src/images/green_mini.png';
 carImg[1] = new Image();
-carImg[1].src = 'src/images/Sports.png';
+carImg[1].src = 'src/images/tan_volvo.png';
 carImg[2] = new Image();
-carImg[2].src = 'src/images/Mini_van.png';
+carImg[2].src = 'src/images/vw_bus.png';
 carImg[3] = new Image();
-carImg[3].src = 'src/images/Mini_truck.png';
+carImg[3].src = 'src/images/green_muscle.png';
 carImg[4] = new Image();
-carImg[4].src = 'src/images/Ambulance.png';
+carImg[4].src = 'src/images/white_range.png';
 carImg[5] = new Image();
-carImg[5].src = 'src/images/taxi.png';
+carImg[5].src = 'src/images/blue_vert.png';
 carImg[6] = new Image();
-carImg[6].src = 'src/images/Black_viper.png';
+carImg[6].src = 'src/images/red_hatch.png';
+
 
 
 
 
 function addCar() {
     const lanes = [200, 320, 450, 580];
-    const width = [70, 85, 110, 110, 110, 85];
-    const height = [140, 160, 220, 220, 220, 160];
+    // const width = [70, 85, 110, 110, 110, 85];
+    // const height = [140, 160, 220, 220, 220, 160];
+    const width = [57, 87, 95, 77, 87, 87, 74];
+    const height = [117, 176, 204, 170, 176, 176, 145];
     
     var randLane = lanes[(Math.floor(Math.random() * 4))]
-    var randCar = Math.floor(Math.random() * 6);
+    var randCar = Math.floor(Math.random() * 7);
 
     traffic.push({ "img": carImg[randCar], "x": randLane, "y": -600, "w": width[randCar], "h": height[randCar], "speed": 8})
 }
@@ -123,7 +131,7 @@ function renderLives() {
 function hitDetect() {
     for (var i = 0; i < traffic.length; i++) {
         var e = traffic[i];
-        if (carX + carWidth >= e.x && carX <= e.x + e.w && carY >= e.y && carY <= e.y + e.h) {
+        if (carX + carWidth > e.x && carX < e.x + e.w && carY > e.y && carY < e.y + e.h) {
             traffic.splice(i, 1);
             lives -= 1;
         }
@@ -179,9 +187,9 @@ function keyUpHandler(e) {
 
 function drawcar() {
     var img = new Image();
-    img.src = "src/images/murci_sv.png";
-    ctx.drawImage(img, 0, 0, 646, 1339, carX, carY, carWidth, carHeight);
-
+    img.src = "src/images/white_gt3.png";
+    ctx.drawImage(img, carX, carY, carWidth, carHeight);
+    // ctx.drawImage(img, 0, 0, 646, 1339, carX, carY, carWidth, carHeight);
 }
 
 function drawScore() {
@@ -189,6 +197,7 @@ function drawScore() {
     ctx.fillStyle = "#0095DD";
     ctx.fillText("Score: " + score, 8, 20);
 }
+
 function drawLives() {
     ctx.font = "25px Arial";
     ctx.fillStyle = "#0095DD";
@@ -207,9 +216,6 @@ function draw() {
         renderCoins()
         renderLives()
     }
-    
-    
-    
 
     if (rightPressed && carX < canvas.width - carWidth) {
         carX += 7;
@@ -224,7 +230,6 @@ function draw() {
         carY += 7;
     }
     
-
     x += dx;
     y += dy;
     requestAnimationFrame(draw);
