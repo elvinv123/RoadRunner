@@ -19,5 +19,29 @@ body{
     z-index: 1000;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -85%);
+    transform: translate(-50%, -65%);
+}
+
+#play-btn {
+border: none;
+background: #404040;
+color: #ffffff !important;
+font-weight: 100;
+padding: 20px;
+text-transform: uppercase;
+border-radius: 6px;
+display: inline-block;
+transition: all 0.3s ease 0s;
+
+transform: translate(80%, -80%);
+}
+
+#play-btn:hover {
+color: #404040 !important;
+font-weight: 700 !important;
+letter-spacing: 3px;
+background: none;
+-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+transition: all 0.3s ease 0s;
 }
