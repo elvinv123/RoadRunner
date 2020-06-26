@@ -13,9 +13,7 @@ body{
 .splash-hidden{
     display: none;
 }
-.splash-show{
 
-}
 .game-cover{
     position: absolute;
     background-image: url("../src/images/splash_logo.PNG");
@@ -43,13 +41,15 @@ position: absolute;
 transform: translate(1100px, 450px);
 }
 
-#play-btn:hover {
+#play-btn:hover, #play-again-btn:hover {
 color: #404040 !important;
 font-weight: 700 !important;
 letter-spacing: 3px;
 background: none;
 transition: all 0.3s ease 0s;
 }
+
+
 
 .instructions{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -64,4 +64,41 @@ transition: all 0.3s ease 0s;
 
 .instructions p{
     font-size: 20px;
+}
+
+.game-ovr{
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: transparent;
+    transform: translate(-37%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 640px;
+}
+.game-ovr h1{
+    font-size: 50px;
+}
+.game-ovr p{
+    font-size: 25px;
+}
+#play-again-btn{
+    width: 600px;
+    border: none;
+    background: #404040;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 20px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+    position: absolute;
+    transform: translate(-22%, 480px);
+}
+
+.game-ovr-hidden{
+    display: none;
 }

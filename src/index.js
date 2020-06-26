@@ -1,7 +1,6 @@
 import RoadRunner from './scripts/game';
 import Road from './scripts/road';
 
-
 const canvas = document.getElementById('car-game');
 const canvas2 = document.getElementById('car-game-road');
 const roadnew = new Road(canvas2)
@@ -13,12 +12,8 @@ const roadnew = new Road(canvas2)
 
 
 roadnew.animate();
-
 const ctx = canvas.getContext("2d");
-let x = canvas.width / 2;
-let y = canvas.height - 30;
-let dx = 2;
-let dy = -2;
+
 let carHeight = 155;
 let carWidth = 78;
 let carX = (canvas.width - carWidth) / 2;
@@ -29,7 +24,6 @@ let upPressed = false;
 let downPressed = false;
 let score = 0;
 let lives = 3;
-
 
 let traffic = [];
 let coins = [];
@@ -59,14 +53,8 @@ carImg[5].src = 'src/images/blue_vert.png';
 carImg[6] = new Image();
 carImg[6].src = 'src/images/red_hatch.png';
 
-
-
-
-
 function addCar() {
     const lanes = [200, 320, 450, 580];
-    // const width = [70, 85, 110, 110, 110, 85];
-    // const height = [140, 160, 220, 220, 220, 160];
     const width = [57, 87, 95, 77, 87, 87, 74];
     const height = [117, 176, 204, 170, 176, 176, 145];
     
@@ -116,6 +104,7 @@ function renderCoins() {
         }
     }
 }
+
 function renderLives() {
     for (let i = 0; i < hearts.length; i++) {
         ctx.drawImage(hearts[i].img, hearts[i].x, hearts[i].y += hearts[i].speed, hearts[i].w, hearts[i].h)
@@ -125,7 +114,6 @@ function renderLives() {
     }
 
 }
-
 
 function hitDetect() {
     for (let i = 0; i < traffic.length; i++) {
@@ -225,13 +213,10 @@ function draw() {
         carY -= 7;
     }
     else if (downPressed && carY > 0) {
-        carY += 7;
+        carY += 7; 
     }
-    
-    x += dx;
-    y += dy;
-    requestAnimationFrame(draw);
 
+    requestAnimationFrame(draw);
     if(lives<=0){
         lost();
     }
@@ -239,20 +224,31 @@ function draw() {
 
 function lost(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    document.getElementById("game-ovr").className = "game-ovr"
+    document.getElementById("score").innerHTML = `Score: ${score}`
+    document.getElementById("play-again-btn").addEventListener("click", playAgain);
+    document.getElementById("play-again-btn").addEventListener("click", ()=>{
+    document.getElementById("game-ovr").className = "game-ovr-hidden"})
+}
+
+function play(){
+    carX = (canvas.width - carWidth) / 2;
+    carY = (canvas.width - carWidth) / 2;
     traffic = [];
     coins = [];
     hearts = [];
-    location.reload();
-}
-function play(){
     lives =3;
     draw();
 }
+
+function playAgain(){
+    location.reload();
+}
+
 window.onload = function(){
     document.getElementById("play-btn").addEventListener("click", () => { document.getElementById("splash").className = "splash-hidden" })
     document.getElementById("play-btn").addEventListener("click", play);
-    document.getElementById("play-again-btn").addEventListener("click", play);
-
 }
 
 
