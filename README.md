@@ -1,13 +1,12 @@
 # RoadRunner
 ## Background & Overview
-RoadRuner is a game in which the user drives his car around obstacles collecting gas jugs for extra points
+RoadRuner is a game in which the user drives his car around obstacles collecting gold coins for extra points
 ## Functionality and MVPs
-- Player navigates left right can speed up or slow down with arrow keys
-- Other cars will be obstacles that the player has to avoid.
-- Game continues until the player crashes into one of the obstacles on the road.
-- Slingshot will stop recording when 1/4 mile distance from starting point is reached.
-- Display top speed reached during 1/4 mile run and 0-60mph time.
-- Display results on ranked leaderboard.
+- Player uses arrow keys to control the car
+- Gold coins add 100 points to the player's score
+- Red coins will add a life
+- Other cars will be obstacles that the player has to avoid
+- Game continues until the player runs out of lives.
 ## Wireframes
 ![wireframe](wireframe.png)
 ## Architecture and Technology
