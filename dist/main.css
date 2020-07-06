@@ -1,11 +1,38 @@
 body{
     background-color: black;
 }
+.social .linkedin{
+    width: 50px;
+    margin-right: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-130%, 0%);
+    display: inline-block
+}
+
+.social .github{
+    width: 50px;
+    margin-right: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translate(0%, 0%);
+    display: inline-block
+}
+
+.social .angellist{
+    width: 50px;
+    margin-right: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translate(120%, 0%);
+    display: inline-block
+}
+
 #car-game-road, #car-game{
     position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 #car-game{
     z-index: 1000;
@@ -26,36 +53,35 @@ body{
 }
 
 #play-btn {
-border: none;
-background: #404040;
-width: 150px;
-color: #ffffff !important;
-font-weight: 600;
-font-size: 20px;
-padding: 20px;
-text-transform: uppercase;
-border-radius: 6px;
-display: inline-block;
-transition: all 0.3s ease 0s;
-position: absolute;
-transform: translate(1100px, 450px);
+    border: none;
+    background: #404040;
+    width: 150px;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 20px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+    position: absolute;
+    transform: translate(1100px, 450px);
 }
 
 #play-btn:hover, #play-again-btn:hover {
-color: #404040 !important;
-font-weight: 700 !important;
-letter-spacing: 3px;
-background: none;
-transition: all 0.3s ease 0s;
+    color: #404040 !important;
+    font-weight: 700 !important;
+    letter-spacing: 3px;
+    background: none;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
 }
-
-
 
 .instructions{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
     background-color: black;
-    transform: translate(-50%, 77%);
+    transform: translate(-50%, 62%);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -64,6 +90,15 @@ transition: all 0.3s ease 0s;
 
 .instructions p{
     font-size: 20px;
+}
+.instructions ul{
+    width: 500px;
+    display: inline-block;
+}
+.instructions img{
+    display: inline-block;
+    width: 150px;
+    margin-left: 100px;;
 }
 
 .game-ovr{
@@ -102,3 +137,4 @@ transition: all 0.3s ease 0s;
 .game-ovr-hidden{
     display: none;
 }
+
