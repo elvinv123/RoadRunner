@@ -1,6 +1,7 @@
 body{
     background-color: black;
 }
+
 .social .linkedin{
     width: 50px;
     margin-right: 20px;
@@ -34,9 +35,11 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 #car-game{
     z-index: 1000;
 }
+
 .splash-hidden{
     display: none;
 }
@@ -81,7 +84,7 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
     background-color: black;
-    transform: translate(-50%, 62%);
+    transform: translate(-50%, 58%);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -91,10 +94,12 @@ body{
 .instructions p{
     font-size: 20px;
 }
+
 .instructions ul{
     width: 500px;
     display: inline-block;
 }
+
 .instructions img{
     display: inline-block;
     width: 150px;
@@ -112,12 +117,15 @@ body{
     width: 400px;
     height: 640px;
 }
+
 .game-ovr h1{
     font-size: 50px;
 }
+
 .game-ovr p{
     font-size: 25px;
 }
+
 #play-again-btn{
     width: 600px;
     border: none;

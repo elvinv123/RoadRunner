@@ -22,6 +22,7 @@ let rightPressed = false;
 let leftPressed = false;
 let upPressed = false;
 let downPressed = false;
+let trafficSpeed = 8;
 let score = 0;
 let lives = 3;
 
@@ -61,7 +62,7 @@ function addCar() {
     const randLane = lanes[(Math.floor(Math.random() * 4))]
     const randCar = Math.floor(Math.random() * 7);
 
-    traffic.push({ "img": carImg[randCar], "x": randLane, "y": -600, "w": width[randCar], "h": height[randCar], "speed": 8})
+    traffic.push({ "img": carImg[randCar], "x": randLane, "y": -600, "w": width[randCar], "h": height[randCar], "speed": trafficSpeed})
 }
 
 function addCoin() {
@@ -69,7 +70,7 @@ function addCoin() {
 
     const randLane = lanes[(Math.floor(Math.random() * 4))]
 
-    coins.push({ "img": coinImg[0], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 4 })
+    coins.push({ "img": coinImg[0], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 6 })
 }
 
 function addLife() {
@@ -77,7 +78,7 @@ function addLife() {
 
     const randLane = lanes[(Math.floor(Math.random() * 4))]
 
-    hearts.push({ "img": coinImg[2], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 5 })
+    hearts.push({ "img": coinImg[2], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 7 })
 }
 
 setInterval(addCar, 800);
@@ -118,21 +119,33 @@ function renderLives() {
 function hitDetect() {
     for (let i = 0; i < traffic.length; i++) {
         let e = traffic[i];
-        if (carX + carWidth > e.x && carX < e.x + e.w && carY > e.y && carY < e.y + e.h) {
+        if (e.x < carX + carWidth &&
+            e.x + e.w > carX &&
+            e.y < carY + carHeight &&
+            e.y + e.h > carY) {
             traffic.splice(i, 1);
             lives -= 1;
         }
+
+     
     }
     for (let i = 0; i < coins.length; i++) {
         let f = coins[i];
-        if (carX + carWidth >= f.x && carX <= f.x + f.w && carY >= f.y && carY <= f.y + f.h) {
+        if (f.x < carX + carWidth &&
+            f.x + f.w > carX &&
+            f.y < carY + carHeight &&
+            f.y + f.h > carY) {
             coins.splice(i, 1);
             score += 100;
+            trafficSpeed += 0.05;
         }
     }
     for (let i = 0; i < hearts.length; i++) {
         let g = hearts[i];
-        if (carX + carWidth >= g.x && carX <= g.x + g.w && carY >= g.y && carY <= g.y + g.h) {
+        if (g.x < carX + carWidth &&
+            g.x + g.w > carX &&
+            g.y < carY + carHeight &&
+            g.y + g.h > carY) {
             hearts.splice(i, 1);
             lives += 1;
         }
@@ -179,15 +192,15 @@ function drawcar() {
 }
 
 function drawScore() {
-    ctx.font = "25px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Score: " + score, 8, 20);
+    ctx.font = "30px Verdana, Geneva, Tahoma, sans-serif";
+    ctx.fillStyle = "white";
+    ctx.fillText("Score: " + score, 8, 25);
 }
 
 function drawLives() {
-    ctx.font = "25px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Lives: " + lives, canvas.width -120, 20);
+    ctx.font = "30px Verdana, Geneva, Tahoma, sans-serif";
+    ctx.fillStyle = "white";
+    ctx.fillText("Lives: " + lives, canvas.width -122, 25);
 }
 
 function draw() {
@@ -238,6 +251,7 @@ function play(){
     traffic = [];
     coins = [];
     hearts = [];
+    trafficSpeed =8;
     lives =3;
     draw();
 }
