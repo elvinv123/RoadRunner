@@ -1,4 +1,4 @@
-# ![logo](./src/images/roadrunner.png)
+![logo](./src/images/roadrunner.png)
 ## Background & Overview
 RoadRuner is a JavaScript car game in which the user drives his car around traffic collecting gold coins for extra points
 ## Functionality and MVPs
