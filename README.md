@@ -1,14 +1,14 @@
 # RoadRunner
 ## Background & Overview
-RoadRuner is a game in which the user drives his car around obstacles collecting gold coins for extra points
+RoadRuner is a JavaScript car game in which the user drives his car around traffic collecting gold coins for extra points
 ## Functionality and MVPs
-- Player uses arrow keys to control the car
-- Gold coins add 100 points to the player's score
-- Red coins will add a life
-- Other cars will be obstacles that the player has to avoid
-- Game continues until the player runs out of lives.
-## Wireframes
-![wireframe](wireframe.png)
+- **Player uses up, right, left, and down arrow keys to control the car**
+- **Gold coins add 100 points to the player's score**
+![Gold Coin](./src/images/gold_coin.gif)
+- **Difficulty increases as score increases**
+- **Red coins will add a life**
+- **Other cars will be obstacles that the player has to avoid**
+- **Game continues until the player runs out of lives.**
 ## Architecture and Technology
 - JavaScript
 - Webpack

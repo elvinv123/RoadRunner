@@ -58,7 +58,6 @@ function addCar() {
     const lanes = [200, 320, 450, 580];
     const width = [57, 87, 95, 77, 87, 87, 74];
     const height = [117, 176, 204, 170, 176, 176, 145];
-    
     const randLane = lanes[(Math.floor(Math.random() * 4))]
     const randCar = Math.floor(Math.random() * 7);
 
@@ -67,7 +66,6 @@ function addCar() {
 
 function addCoin() {
     const lanes = [273, 403, 537];
-
     const randLane = lanes[(Math.floor(Math.random() * 4))]
 
     coins.push({ "img": coinImg[0], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 6 })
@@ -75,7 +73,6 @@ function addCoin() {
 
 function addLife() {
     const lanes = [273, 403, 537];
-
     const randLane = lanes[(Math.floor(Math.random() * 4))]
 
     hearts.push({ "img": coinImg[2], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 7 })
@@ -126,8 +123,6 @@ function hitDetect() {
             traffic.splice(i, 1);
             lives -= 1;
         }
-
-     
     }
     for (let i = 0; i < coins.length; i++) {
         let f = coins[i];

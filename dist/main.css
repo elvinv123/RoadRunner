@@ -1,13 +1,16 @@
 body{
     background-color: black;
 }
-
+.social a{
+    margin-top: 100px;
+}
 .social .linkedin{
     width: 50px;
     margin-right: 20px;
     position: absolute;
     left: 50%;
-    transform: translate(-130%, 0%);
+    top: 50%;
+    transform: translate(-130%, -805%);
     display: inline-block
 }
 
@@ -16,7 +19,8 @@ body{
     margin-right: 20px;
     position: absolute;
     left: 50%;
-    transform: translate(0%, 0%);
+    top: 50%;
+    transform: translate(0%, -805%);
     display: inline-block
 }
 
@@ -25,7 +29,8 @@ body{
     margin-right: 20px;
     position: absolute;
     left: 50%;
-    transform: translate(120%, 0%);
+    top: 50%;
+    transform: translate(120%, -800%);
     display: inline-block
 }
 
