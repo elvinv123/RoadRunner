@@ -4,12 +4,6 @@ import Road from './scripts/road';
 const canvas = document.getElementById('car-game');
 const canvas2 = document.getElementById('car-game-road');
 const roadnew = new Road(canvas2)
-// new RoadRunner(canvas)
-//  new RoadRunner(canvas)
-
-
-// new RoadRunner(canvas);
-
 
 roadnew.animate();
 const ctx = canvas.getContext("2d");
@@ -23,6 +17,7 @@ let leftPressed = false;
 let upPressed = false;
 let downPressed = false;
 let trafficSpeed = 8;
+let carInterval = 800;
 let score = 0;
 let lives = 3;
 
@@ -78,7 +73,7 @@ function addLife() {
     hearts.push({ "img": coinImg[2], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 7 })
 }
 
-setInterval(addCar, 800);
+setInterval(addCar, 10);
 setInterval(addCoin, 1500);  
 setInterval(addLife, 20000);
 
@@ -132,7 +127,11 @@ function hitDetect() {
             f.y + f.h > carY) {
             coins.splice(i, 1);
             score += 100;
-            trafficSpeed += 0.05;
+            trafficSpeed += 0.2;
+            carInterval -= 100;
+            if(carInterval<1) carInterval = 10;
+            console.log(trafficSpeed);
+            console.log(carInterval);
         }
     }
     for (let i = 0; i < hearts.length; i++) {
@@ -246,8 +245,7 @@ function play(){
     traffic = [];
     coins = [];
     hearts = [];
-    trafficSpeed =8;
-    lives =3;
+    lives = 3;
     draw();
 }
 
