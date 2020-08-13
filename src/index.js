@@ -72,8 +72,7 @@ function addLife() {
 
     hearts.push({ "img": coinImg[2], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 7 })
 }
-
-setInterval(addCar, 10);
+let interval = setInterval(addCar, carInterval);
 setInterval(addCoin, 1500);  
 setInterval(addLife, 20000);
 
@@ -127,11 +126,10 @@ function hitDetect() {
             f.y + f.h > carY) {
             coins.splice(i, 1);
             score += 100;
-            trafficSpeed += 0.2;
-            carInterval -= 100;
-            if(carInterval<1) carInterval = 10;
-            console.log(trafficSpeed);
-            console.log(carInterval);
+            trafficSpeed += 0.125;
+            carInterval -= 15;
+            clearInterval(interval);
+            interval = setInterval(addCar, carInterval);
         }
     }
     for (let i = 0; i < hearts.length; i++) {
