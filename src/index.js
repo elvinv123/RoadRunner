@@ -71,6 +71,7 @@ function addLife() {
 
     hearts.push({ "img": coinImg[2], "x": randLane, "y": -600, "w": 30, "h": 30, "speed": 7 })
 }
+
 let interval = setInterval(addCar, carInterval);
 setInterval(addCoin, 1500);  
 setInterval(addLife, 20000);
