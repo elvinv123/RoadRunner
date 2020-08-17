@@ -1,4 +1,3 @@
-import RoadRunner from './scripts/game';
 import Road from './scripts/road';
 
 const canvas = document.getElementById('car-game');
