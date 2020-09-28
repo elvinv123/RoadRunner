@@ -1,6 +1,7 @@
 ![logo](./src/images/roadrunner.png)
 ## Background & Overview
-RoadRunner is a JavaScript car game in which the user drives his car around traffic collecting gold coins for extra points
+RoadRunner is a JavaScript car game in which the user drives his car around traffic collecting gold coins for extra points.
+You can play [here!](https://elvinv123.github.io/RoadRunner/)
 ## Functionality and MVPs
 - **Player uses up, right, left, and down arrow keys to control the car**
 - **Gold coins add 100 points to the player's score**
